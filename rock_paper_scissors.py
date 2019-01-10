@@ -11,21 +11,26 @@ class Player:
         pass
 
 class HumanPlayer(Player):
+
     def move(self):
+
         while True:
-                user_input = input("Pick one - \"rock\" or \"paper\" or \"scissors\":-  ")
-                if user_input != "rock" and user_input != "paper" and user_input != "scissors":
-                    print(f"common human you entered {user_input} instead of rock or paper or scissors")
-                    continue
-                else:
-                    break
+            user_input = input("Pick one - \"rock\" or \"paper\" or \"scissors\":-  ")
+
+            if user_input != "rock" and user_input != "paper" and user_input != "scissors":
+                print(f"common human you entered {user_input} instead of rock or paper or scissors")
+                continue
+            else:
+                break
         return user_input
 
 class RandomPlayer(Player):
+
     def move(self):
         return random.choice(moves)
 
 class ReflectPlayer(Player):
+
     def __init__(self):
         self.move_temp = "rock"
 
@@ -36,6 +41,7 @@ class ReflectPlayer(Player):
         self.move_temp = their_move
 
 class CyclerPlayer(Player):
+
     def __init__(self):
         self.my_move = random.choice(moves)
 
@@ -71,6 +77,7 @@ class Game:
 
     def play_game(self):
         print("Game start!")
+
         while True:
             try:
                 game_count = int(input("How many times do you want to play? :- "))
@@ -82,6 +89,7 @@ class Game:
                 continue
             else:
                 break
+
         for round in range(game_count):
             print(f"\n*****Round {round}:*****")
             self.play_round()
@@ -108,29 +116,31 @@ class Game:
             self.player2 += 1
         else:
             self.draw += 1
-
         print(f"\n:::Total score::: \n No of draws {self.draw} \n Player 1 total wins {self.player1} \n Player 2 total wins {self.player2}")
 
 if __name__ == '__main__':
     while True:
         try:
             game_play = int(input("Welcome to the game of rock paper scissors. Enter the option (1 or 2 or 3 or 4) you want to play against \n 1. play against a random bot? \n 2. play against a reflect bot? \n 3. play against a cycler bot? \n 4. watch bots play against each other? \n :-"))
-            if game_play == 1:
-                game = Game(HumanPlayer(), RandomPlayer())
-                game.play_game()
-            elif game_play == 2:
-                game = Game(HumanPlayer(), ReflectPlayer())
-                game.play_game()
-            elif game_play ==3:
-                game = Game(HumanPlayer(), CyclerPlayer())
-                game.play_game()
-            elif game_play ==4:
-                game = Game(RandomPlayer(), ReflectPlayer())
-                game.play_game()
-            break
         except ValueError:
             print("Does not make sense")
             continue
-        if game_play != 1 or game_play != 2 or game_play != 3 or game_play != 4:
+
+        if game_play != 1 and game_play != 2 and game_play != 3 and4 game_play != 4:
             print("Does not make sense")
             continue
+        else:
+            break
+
+    if game_play == 1:
+        game = Game(HumanPlayer(), RandomPlayer())
+        game.play_game()
+    elif game_play == 2:
+        game = Game(HumanPlayer(), ReflectPlayer())
+        game.play_game()
+    elif game_play == 3:
+        game = Game(HumanPlayer(), CyclerPlayer())
+        game.play_game()
+    elif game_play == 4:
+        game = Game(RandomPlayer(), ReflectPlayer())
+        game.play_game()
