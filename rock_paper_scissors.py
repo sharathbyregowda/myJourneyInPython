@@ -115,16 +115,24 @@ class Game:
         print(f"\n:::Total score::: \n No of draws {self.draw} \n Player 1 total wins {self.player1} \n Player 2 total wins {self.player2}")
 
 if __name__ == '__main__':
-    game_play = int(input("Welcome to the game of rock paper scissors. Enter the option (1 or 2 or 3 or 4) you want to play against \n 1. play against a random bot? \n 2. play against a reflect bot? \n 3. play against a cycler bot? \n 4. watch bots play against each other? \n :-"))
-    if game_play == 1:
-        game = Game(HumanPlayer(), RandomPlayer())
-        game.play_game()
-    elif game_play == 2:
-        game = Game(HumanPlayer(), ReflectPlayer())
-        game.play_game()
-    elif game_play ==3:
-        game = Game(HumanPlayer(), CyclerPlayer())
-        game.play_game()
-    else:
-        game = Game(RandomPlayer(), ReflectPlayer())
-        game.play_game()
+    while True:
+        try:
+            game_play = int(input("Welcome to the game of rock paper scissors. Enter the option (1 or 2 or 3 or 4) you want to play against \n 1. play against a random bot? \n 2. play against a reflect bot? \n 3. play against a cycler bot? \n 4. watch bots play against each other? \n :-"))
+            if game_play == 1:
+                game = Game(HumanPlayer(), RandomPlayer())
+                game.play_game()
+            elif game_play == 2:
+                game = Game(HumanPlayer(), ReflectPlayer())
+                game.play_game()
+            elif game_play ==3:
+                game = Game(HumanPlayer(), CyclerPlayer())
+                game.play_game()
+            elif game_play ==4:
+                game = Game(RandomPlayer(), ReflectPlayer())
+                game.play_game()
+        except ValueError:
+            print("Does not make sense")
+            continue
+        if game_play != 1 or game_play != 2 or game_play != 3 or game_play != 4:
+            print("Does not make sense")
+            continue
