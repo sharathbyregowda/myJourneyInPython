@@ -130,6 +130,7 @@ if __name__ == '__main__':
             elif game_play ==4:
                 game = Game(RandomPlayer(), ReflectPlayer())
                 game.play_game()
+            break
         except ValueError:
             print("Does not make sense")
             continue
