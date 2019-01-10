@@ -1,51 +1,14 @@
 import random
-"""This program plays a game of Rock, Paper, Scissors between two Players,
-and reports both Player's scores each round."""
 
 moves = ['rock', 'paper', 'scissors']
 
-"""The Player class is the parent class for all of the Players
-in this game"""
-
 class Player:
-    player1 = 0
-    player2 = 0
-    draw = 0
 
     def move(self):
         return 'rock'
 
     def learn(self, my_move, their_move):
         pass
-
-    def beats(one, two):
-        if one == two:
-            result = "**Thats a tie**"
-            print(result)
-            Player.scoreboard(result)
-            #return result
-        elif ((one == 'rock' and two == 'scissors') or (one == 'scissors' and two == 'paper') or (one == 'paper' and two == 'rock')):
-            result = "**Player 1 Win**"
-            print(result)
-            Player.scoreboard(result)
-            #return result
-        else:
-            result = "**Player 2 Win**"
-            print(result)
-            Player.scoreboard(result)
-            #return result
-
-    def scoreboard(result):
-        if result == "**Player 1 Win**":
-            Player.player1 += 1
-
-        elif result == "**Player 2 Win**":
-            Player.player2 += 1
-
-        else:
-            Player.draw += 1
-
-        print(f"\n:::Total score::: \n No of draws {Player.draw} \n Player 1 total wins {Player.player1} \n Player 2 total wins {Player.player2}")
 
 class HumanPlayer(Player):
     def move(self):
@@ -64,7 +27,7 @@ class RandomPlayer(Player):
 
 class ReflectPlayer(Player):
     def __init__(self):
-        self.move_temp = random.choice(moves)
+        self.move_temp = "rock"
 
     def move(self):
         return self.move_temp
@@ -72,18 +35,29 @@ class ReflectPlayer(Player):
     def learn(self, my_move, their_move):
         self.move_temp = their_move
 
-class Cycler(Player):
+class CyclerPlayer(Player):
+    def __init__(self):
+        self.my_move = random.choice(moves)
+
     def move(self):
-        if my_move == "rock":
+        if self.my_move == "rock":
             return "paper"
-        elif my_move == "paper":
+        elif self.my_move == "paper":
             return "scissors"
-        elif my_move == "scissors":
+        elif self.my_move == "scissors":
             return "rock"
         else:
             return "rock"
 
+    def learn(self, my_move, their_move):
+        self.my_move = my_move
+
 class Game:
+
+    player1 = 0
+    player2 = 0
+    draw = 0
+
     def __init__(self, p1, p2):
         self.p1 = p1
         self.p2 = p2
@@ -93,7 +67,7 @@ class Game:
         move2 = self.p2.move()
         print(f"Player 1: {move1}  Player 2: {move2}")
         #Player.learn(move1, move2)
-        move = Player.beats(move1, move2)
+        move = self.beats(move1, move2)
         #print(move)
         self.p1.learn(move1, move2)
         self.p2.learn(move2, move1)
@@ -104,7 +78,7 @@ class Game:
             try:
                 game_count = int(input("How many times do you want to play? :- "))
             except ValueError:
-                print("Sorry that does not make sense. Please stick to positive integers - example: 5, 7")
+                print("Sorry that does not make sense. Please stick to positive integers - example: 1, 3, 5, 7, etc")
                 continue
             if game_count < 0 or game_count == 0:
                 print("Please enter a positive integer")
@@ -116,6 +90,41 @@ class Game:
             self.play_round()
         print("Game over!")
 
+    def beats(self, one, two):
+        if one == two:
+            result = "**Thats a tie**"
+            print(result)
+            self.scoreboard(result)
+        elif ((one == 'rock' and two == 'scissors') or (one == 'scissors' and two == 'paper') or (one == 'paper' and two == 'rock')):
+            result = "**Player 1 Win**"
+            print(result)
+            self.scoreboard(result)
+        else:
+            result = "**Player 2 Win**"
+            print(result)
+            self.scoreboard(result)
+
+    def scoreboard(self, result):
+        if result == "**Player 1 Win**":
+            self.player1 += 1
+        elif result == "**Player 2 Win**":
+            self.player2 += 1
+        else:
+            self.draw += 1
+
+        print(f"\n:::Total score::: \n No of draws {self.draw} \n Player 1 total wins {self.player1} \n Player 2 total wins {self.player2}")
+
 if __name__ == '__main__':
-    game = Game(HumanPlayer(), ReflectPlayer())
-    game.play_game()
+    game_play = int(input("Welcome to the game of rock paper scissors. Enter the option (1 or 2 or 3 or 4) you want to play against \n 1. play against a random bot? \n 2. play against a reflect bot? \n 3. play against a cycler bot? \n 4. watch bots play against each other? \n :-"))
+    if game_play == 1:
+        game = Game(HumanPlayer(), RandomPlayer())
+        game.play_game()
+    elif game_play == 2:
+        game = Game(HumanPlayer(), ReflectPlayer())
+        game.play_game()
+    elif game_play ==3:
+        game = Game(HumanPlayer(), CyclerPlayer())
+        game.play_game()
+    else:
+        game = Game(RandomPlayer(), ReflectPlayer())
+        game.play_game()
