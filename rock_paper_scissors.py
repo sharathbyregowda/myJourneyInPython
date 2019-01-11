@@ -126,7 +126,7 @@ if __name__ == '__main__':
             print("Does not make sense")
             continue
 
-        if game_play != 1 and game_play != 2 and game_play != 3 and4 game_play != 4:
+        if game_play != 1 and game_play != 2 and game_play != 3 and game_play != 4:
             print("Does not make sense")
             continue
         else:
