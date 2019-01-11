@@ -17,10 +17,15 @@ class HumanPlayer(Player):
     def move(self):
 
         while True:
-            user_input = input("Pick one - \"rock\" or \"paper\" or \"scissors\":-  ")
+            user_input = input('Pick one - "rock" or "paper" '
+                               'or "scissors":-  ')
+            user_input = user_input.lower()
 
-            if user_input != "rock" and user_input != "paper" and user_input != "scissors":
-                print(f"common human you entered {user_input} instead of rock or paper or scissors")
+            if user_input != "rock" \
+                    and user_input != "paper" \
+                    and user_input != "scissors":
+                print(f'common human you entered {user_input} '
+                      f'instead of rock or paper or scissors')
                 continue
             else:
                 break
@@ -86,9 +91,12 @@ class Game:
 
         while True:
             try:
-                game_count = int(input("How many times do you want to play? :- "))
+                game_count = int(input('How many times '
+                                       'do you want to play? :- '))
             except ValueError:
-                print("Sorry that does not make sense. Please stick to positive integers - example: 1, 3, 5, 7, etc")
+                print('Sorry that does not make sense. '
+                      'Please stick to positive integers '
+                      '- example: 1, 3, 5, 7, etc')
                 continue
             if game_count < 0 or game_count == 0:
                 print("Please enter a positive integer")
@@ -106,7 +114,9 @@ class Game:
             result = "**Thats a tie**"
             print(result)
             self.scoreboard(result)
-        elif ((one == 'rock' and two == 'scissors') or (one == 'scissors' and two == 'paper') or (one == 'paper' and two == 'rock')):
+        elif (one == 'rock' and two == 'scissors') \
+                or (one == 'scissors' and two == 'paper') \
+                or (one == 'paper' and two == 'rock'):
             result = "**Player 1 Win**"
             print(result)
             self.scoreboard(result)
@@ -122,17 +132,31 @@ class Game:
             self.player2 += 1
         else:
             self.draw += 1
-        print(f"\n:::Total score::: \n No of draws {self.draw} \n Player 1 total wins {self.player1} \n Player 2 total wins {self.player2}")
+        print(f'\n:::Total score::: \n No of draws {self.draw} \n '
+              f'Player 1 total wins {self.player1} \n '
+              f'Player 2 total wins {self.player2}')
+
 
 if __name__ == '__main__':
     while True:
         try:
-            game_play = int(input("Welcome to the game of rock paper scissors. Enter the option (1 or 2 or 3 or 4) you want to play against \n 1. play against a random bot? \n 2. play against a reflect bot? \n 3. play against a cycler bot? \n 4. watch bots play against each other? \n :-"))
+            game_play = int(input('Welcome to the game '
+                                  'of rock paper scissors. '
+                                  'Enter the option (1 or 2 or 3 or 4) '
+                                  'you want to play against \n '
+                                  '1. play against a random bot? \n '
+                                  '2. play against a reflect bot? \n '
+                                  '3. play against a cycler bot? \n '
+                                  '4. watch bots play against '
+                                  'each other? \n :-'))
         except ValueError:
             print("Does not make sense")
             continue
 
-        if game_play != 1 and game_play != 2 and game_play != 3 and game_play != 4:
+        if game_play != 1 and \
+                game_play != 2 and \
+                game_play != 3 and \
+                game_play != 4:
             print("Does not make sense")
             continue
         else:
