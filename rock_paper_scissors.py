@@ -2,6 +2,7 @@ import random
 
 moves = ['rock', 'paper', 'scissors']
 
+
 class Player:
 
     def move(self):
@@ -9,6 +10,7 @@ class Player:
 
     def learn(self, my_move, their_move):
         pass
+
 
 class HumanPlayer(Player):
 
@@ -24,10 +26,12 @@ class HumanPlayer(Player):
                 break
         return user_input
 
+
 class RandomPlayer(Player):
 
     def move(self):
         return random.choice(moves)
+
 
 class ReflectPlayer(Player):
 
@@ -39,6 +43,7 @@ class ReflectPlayer(Player):
 
     def learn(self, my_move, their_move):
         self.move_temp = their_move
+
 
 class CyclerPlayer(Player):
 
@@ -57,6 +62,7 @@ class CyclerPlayer(Player):
 
     def learn(self, my_move, their_move):
         self.my_move = my_move
+
 
 class Game:
 
