@@ -7,7 +7,7 @@ from whenYouAre100 import *
 @given(st.integers(min_value=0,max_value=101))
 #@settings(database=ExampleDatabase('***'))
 def test_forhundred(i):
-    person = Person('Sharath', i)
+    person = Person('Sha', i)
     assert person.whenyouturnhundred() == 2019 + (100-i)
 
 def test_forhundred():
