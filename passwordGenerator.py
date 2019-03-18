@@ -41,7 +41,7 @@ def chunk_it(seq):
 if __name__ == '__main__':
     correct = False
     while not correct:
-        input_str = input("password length?. Please be sensible and pick a value from 7 to 12:-  ")
+        input_str = input("Password length?. (Passwords shorter than 10 characters are considered to be weak) :-  ")
         try:
             pass_len = int(input_str)
             if pass_len == 0 or pass_len < 11 or pass_len > 128:
